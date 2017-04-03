@@ -6,9 +6,14 @@ from django.db import models
 
 class Query(models.Model):
     ''' Class to story queries for Array Express api '''
+    query_id = models.CharField(max_length=6)
     keywords = models.CharField(max_length=2000)
     organism = models.CharField(max_length=200)
     experiment_type = models.CharField(max_length=200)
+
+    def _to_list(self):
+        ''' '''
+        return [self.query_id, self.keywords, self.organism, self.experiment_type]
 
 class Sample(models.Model):
     ''' Class to stori info about single array express record '''

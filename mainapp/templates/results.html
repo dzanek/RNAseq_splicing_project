@@ -62,8 +62,9 @@
         <p class="lead">You did it!<br> Dude.</p>
 
             <form method="POST" class="query-form">{% csrf_token %}
-                {{ results }}
-                <button type="submit" class="save btn btn-default">Search!</button>
+                {% for r in  result %}
+                {{ r }}<br>
+                {% endfor %}
 
       </div>
 
