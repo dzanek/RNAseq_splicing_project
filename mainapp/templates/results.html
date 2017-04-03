@@ -59,10 +59,10 @@
 
       <div class="starter-template">
           <h1>{{ hello_world }}</h1>
-        <p class="lead">Go. Search some RNAseq.<br> Dude.</p>
+        <p class="lead">You did it!<br> Dude.</p>
 
             <form method="POST" class="query-form">{% csrf_token %}
-                {{ form.as_p }}
+                {{ results }}
                 <button type="submit" class="save btn btn-default">Search!</button>
 
       </div>
