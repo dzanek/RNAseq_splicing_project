@@ -3,6 +3,9 @@ from .forms import QueryForm
 from .models import Query, Sample
 import random as r
 import string
+
+from array_express_api import *
+
 # Create your views here.
 
 def home(request):
@@ -21,7 +24,12 @@ def home(request):
 def search_results(request, query_id):
     ''' '''
     query = get_object_or_404(Query, query_id = query_id)
-    query = query._to_list()
-    return render(request, 'results.html', {'result':list(query)})
+    results = Array_express()
+    results.build_query(organism=query.organism.split(','), keywords=query.keywords.split(','))
+    results.search(keywords=query.keywords.split(','),experiment=query.experiment_type.split(','))
+    results = results.get_results()
+    results = [str(i) for i in results]
+
+    return render(request, 'results.html', {'result':results})
 def _do_Sth(sth):
     return sth

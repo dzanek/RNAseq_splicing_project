@@ -3,7 +3,7 @@ import json
 import sys
 
 
-args = ['*seq','hepatocyte']
+args = ['*seq']
 organism = 'mouse'
 
 class Array_express_search:
@@ -25,7 +25,7 @@ class Array_express_search:
         self.content = json.loads(self.content)
         self.content = self.content['experiments']['experiment']
         print 'I fount {} experiments'.format(len(self.content))
-
+        return self.content
 class Array_express_results:
     ''' '''
     def __init__(self, content):
@@ -34,8 +34,13 @@ class Array_express_results:
 
     def parse_content(self):
         ''' '''
-        self.content = [i for i in self.content if 'RNA' in i['text'] or 'hepatocyte' in i['text']]
-        self.content = [i for i in self,content if len([k for k in i['experimenttype'] if 'seq' in k ]) > 0]
+        self.content = [i for i in self.content if 'tnf' in str(i) or 'interleukin' or 'tf6' in str(i)]
+        self.content = [i for i in self.content if len([k for k in i['experimenttype'] if 'seq' in k and 'RNA' in k ]) > 0]
+        for k in ['hepato', 'adipo', 'epiderm']:
+            thisone = [v for v in self.content if k in str(v)]
+            print len(thisone)
+            for v in thisone:
+                print v['accession']
         print 'after refinement {}'.format(len(self.content))
 
     def print_ids(self):
@@ -49,6 +54,6 @@ def main():
     search.get_keywords()
     results = Array_express_results(search.get_results())
     results.parse_content()
-
+    #results.print_ids()
 if __name__ == '__main__':
     main()
