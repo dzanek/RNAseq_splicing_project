@@ -10,10 +10,13 @@ class Query(models.Model):
     keywords = models.CharField(max_length=2000)
     organism = models.CharField(max_length=200)
     experiment_type = models.CharField(max_length=200)
-
     def _to_list(self):
         ''' '''
         return [self.query_id, self.keywords, self.organism, self.experiment_type]
+
+
+class Experiment(models.Model):
+    ''' '''
 
 class Sample(models.Model):
     ''' Class to stori info about single array express record '''

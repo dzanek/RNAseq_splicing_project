@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import QueryForm
-from .models import Query, Sample
+from .models import Query, Experiment
 import random as r
 import string
 
@@ -25,11 +25,10 @@ def search_results(request, query_id):
     ''' '''
     query = get_object_or_404(Query, query_id = query_id)
     results = Array_express()
-    results.build_query(organism=query.organism.split(','), keywords=query.keywords.split(','))
-    results.search(keywords=query.keywords.split(','),experiment=query.experiment_type.split(','))
+    results.build_query(organism=query.organism.replace(' ','').split(','), experiment=query.experiment_type.replace(' ','').split(','))
+    results.search(keywords=query.keywords.replace(' ','').split(','),experiment=query.experiment_type.replace(' ','').split(','))
     results = results.get_results()
-    results = [str(i) for i in results]
-
+    results = [Experiment(i) for i in results]
     return render(request, 'results.html', {'result':results})
 def _do_Sth(sth):
     return sth
