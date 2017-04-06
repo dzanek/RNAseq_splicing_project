@@ -63,7 +63,7 @@
 
             <form method="POST" class="query-form">{% csrf_token %}
                 {% for r in  result %}
-                {{ r }}<br>
+                <a href={{ r }}>{{ r }}</a><br>
                 {% endfor %}
 
       </div>

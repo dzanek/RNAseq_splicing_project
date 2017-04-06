@@ -13,14 +13,21 @@ class Query(models.Model):
     def _to_list(self):
         ''' '''
         return [self.query_id, self.keywords, self.organism, self.experiment_type]
-
+    def __str__(self):
+        return '{}|{}'.format(self.query_id, self.keywords+self.organism+self.experiment_type)
 
 class Experiment(models.Model):
     ''' '''
-
-class Sample(models.Model):
-    ''' Class to stori info about single array express record '''
+    source_query = models.ForeignKey(Query)
     experiment_id = models.CharField(max_length=50)
     experiment_type = models.CharField(max_length=200)
     experiment_description = models.TextField()
     experiment_link = models.CharField(max_length=200)
+
+    def __str__(self):
+        ''' '''
+        return self.experiment_link
+
+class Sample(models.Model):
+    ''' Class to stori info about single array express record '''
+    pass
