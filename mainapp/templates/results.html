@@ -64,6 +64,7 @@
             <form method="POST" class="query-form">{% csrf_token %}
                 {% for r in  result %}
                 <a href={{ r }}>{{ r }}</a><br>
+                {{ r.experiment_description }}<br>
                 {% endfor %}
 
       </div>

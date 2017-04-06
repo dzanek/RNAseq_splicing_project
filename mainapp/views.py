@@ -30,7 +30,7 @@ def search_results(request, query_id):
     results = results.get_results()
     for i in  results[0].iteritems():
         print i[0], i[1], 'xxx'
-    results = [Experiment(source_query=query, experiment_id=i['accession'], experiment_type=i['experimenttype'], experiment_description=i['description'], experiment_link = 'https://www.ebi.ac.uk/arrayexpress/experiments/{}/'.format(i['accession'])) for i in results]
+    results = [Experiment(source_query=query, experiment_id=i['accession'], experiment_type=i['experimenttype'], experiment_description=i['description'][0]['text'], experiment_link = 'https://www.ebi.ac.uk/arrayexpress/experiments/{}/'.format(i['accession'])) for i in results]
     for i in results:
         i.save()
     return render(request, 'results.html', {'result':results})
