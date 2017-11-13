@@ -81,13 +81,14 @@ for i in inputs:
     genomic = ''.join([i.strip() for i in genomic])
 
     intron_starts = set([i[0] for i in ranges.iterkeys()])
-
+    intron_variants = []
     for i in intron_starts:
         for k in ranges.iteritems():
             if i == k[0][0]:
                 print k
+                intron_variants.append(k[0])
         print '\n'
-
+    print intron_variants
     pl.plot([i[0] for i in pos_intron.iteritems()],[i[1] for i in pos_intron.iteritems()], label=i)
     pl.ylim(0,400)
     pl.xlim(3400,4000)
